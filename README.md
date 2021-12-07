@@ -14,6 +14,9 @@
 1. 核心代码<br>
 （1）Pay抽象类
 ``` 
+import mode.IPayMode;
+
+import java.math.BigDecimal;
 /**
  * @author Guo Chen
  * @date 2021年12月05日 19:41
@@ -27,7 +30,7 @@ public abstract class Pay {
      * @param payMode 
      * @return null
      */
-    public Pay(IPayMode payMode){
+    public Pay(IPayMode payMode){//付款方式
         this.payMode=payMode;
     }
     /**
@@ -39,21 +42,118 @@ public abstract class Pay {
      * @param amount 
      * @return java.lang.String
      */
-    public abstract String transfer(String uId, String tradeId, BigDecimal amount);
+    public abstract String transfer(String uId, String tradeId, BigDecimal amount);//用户ID、交易ID、数额
 }
 ```
 
 （2）微信支付实现类
+```
+import java.math.BigDecimal;
 
+/**
+ * @author Guo Chen
+ * @date 2021年12月05日 19:44
+ */
+public class WxPay extends Pay{
+    /**
+     *
+     * @author Guo Chen
+     * @date 2021/12/5 20:14
+     * @param payMode 
+     * @return null
+     */
+    public WxPay(IPayMode payMode) {
+        super(payMode);
+    }
+    /**
+     *
+     * @author Guo Chen
+     * @date 2021/12/5 20:43
+     * @param uId
+     * @param tradeId
+     * @param amount
+     * @return java.lang.String
+     */
+    public String transfer(String uId, String tradeId, BigDecimal amount) {
+        System.out.printf("模拟微信渠道支付划账开始。uId：%s tradeId：%s amount：%f\n", uId, tradeId, amount);
+        boolean security = payMode.security(uId);
+        System.out.printf("模拟微信渠道支付风控校验。uId：%s tradeId：%s security：%s\n", uId, tradeId, security);
+        if (!security) {
+            System.out.printf("模拟微信渠道支付划账拦截。uId：%s tradeId：%s amount：%f\n", uId, tradeId, amount);
+            return "0001";
+        }
+        System.out.printf("模拟微信渠道支付划账成功。uId：%s tradeId：%s amount：%f\n", uId, tradeId, amount);
+        return "0000";
+    }
+}
+```
 
 （3）付款方式接口<br>
-
+```
+/**
+ * @author Guo Chen
+ * @date 2021年12月05日 19:41
+ */
+public interface IPayMode {
+    /**
+     *
+     * @author Guo Chen
+     * @date 2021/12/5 20:43
+ * @param uId
+ * @return boolean
+     */
+    boolean security(String uId);
+}
+```
 
 （4）刷脸方式实现类<br>
-
+```
+/**
+ * @author Guo Chen
+ * @date 2021年12月05日 19:49
+ */
+public class PayFaceMode implements IPayMode{
+    /**
+     *
+     * @author Guo Chen
+     * @date 2021/12/5 20:15
+     * @param uId 
+     * @return boolean
+     */
+    public boolean security(String uId) {
+        System.out.println("人脸支付，风控校验脸部识别");
+        return true;
+    }
+}
+```
 
 （5）测试类
+```
+import java.math.BigDecimal;
 
+/**
+ * @author Guo Chen
+ * @date 2021年12月05日 20:00
+ */
+public class ApiTest {
+
+    /**
+     *
+     * @author Guo Chen
+     * @date 2021/12/5 20:17 
+     */
+    @Test
+    public void test_pay(){
+        System.out.println("模拟测试场景；微信支付、人脸方式");
+        Pay wxPay=new WxPay(new PayFaceMode());
+        wxPay.transfer("DesignPatternWechat", "111111111", new BigDecimal(100));
+        System.out.println("\n模拟测试场景；支付宝支付、指纹方式。");
+        Pay zfbPay = new ZfbPay(new PayFingerPrintMode());
+        zfbPay.transfer("DesignPatternZFB","222222222",new BigDecimal(100));
+
+    }
+}
+```
 
 2. 项目结构<br>
 ![image](https://user-images.githubusercontent.com/66066390/145042139-712f479a-4b2d-4e4a-8b22-df1ef0ca0a17.png)
