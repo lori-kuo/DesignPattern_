@@ -7,27 +7,27 @@
 ### 二、解决方案
 由问题导入可以看出，这个问题里有支付方式和付款方式两部分，两者可以独立变化，适合使用桥接模式。
 ### 三、UML
-图片: ![image](https://user-images.githubusercontent.com/66066390/145041829-92a6cfb7-6d9b-4e29-b9e7-6b3945739ddd.png)
+![image](https://user-images.githubusercontent.com/66066390/145041829-92a6cfb7-6d9b-4e29-b9e7-6b3945739ddd.png)
 
 
 ### 四、核心代码
-1. 核心代码
+1. 核心代码<br>
 （1）Pay抽象类
-图片: ![image](https://user-images.githubusercontent.com/66066390/145041884-c97d6207-82fc-45bb-8dca-2321ca5b764b.png)
+![image](https://user-images.githubusercontent.com/66066390/145041884-c97d6207-82fc-45bb-8dca-2321ca5b764b.png)
 
 （2）微信支付实现类
-图片: ![image](https://user-images.githubusercontent.com/66066390/145041946-05a322db-477a-49c2-b385-b3390a195492.png)
+![image](https://user-images.githubusercontent.com/66066390/145041946-05a322db-477a-49c2-b385-b3390a195492.png)
 
 （3）付款方式接口
-图片: ![image](https://user-images.githubusercontent.com/66066390/145041999-dde5e205-b8b0-45fd-b4c3-edcd27cf49a3.png)
+![image](https://user-images.githubusercontent.com/66066390/145041999-dde5e205-b8b0-45fd-b4c3-edcd27cf49a3.png)
 
 （4）刷脸方式实现类
-图片: ![image](https://user-images.githubusercontent.com/66066390/145042036-b24e6463-bc0d-45aa-87b5-df2ed0b94a09.png)
+![image](https://user-images.githubusercontent.com/66066390/145042036-b24e6463-bc0d-45aa-87b5-df2ed0b94a09.png)
 
 （5）测试类
-图片: ![image](https://user-images.githubusercontent.com/66066390/145042110-12da4ad7-5057-4173-8fa2-971f9a773594.png)
+![image](https://user-images.githubusercontent.com/66066390/145042110-12da4ad7-5057-4173-8fa2-971f9a773594.png)
 
 2. 项目结构
-图片: ![image](https://user-images.githubusercontent.com/66066390/145042139-712f479a-4b2d-4e4a-8b22-df1ef0ca0a17.png)
+![image](https://user-images.githubusercontent.com/66066390/145042139-712f479a-4b2d-4e4a-8b22-df1ef0ca0a17.png)
 
 
