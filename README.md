@@ -13,21 +13,49 @@
 ### 四、核心代码
 1. 核心代码<br>
 （1）Pay抽象类
-![image](https://user-images.githubusercontent.com/66066390/145041884-c97d6207-82fc-45bb-8dca-2321ca5b764b.png)
+``` 
+/**
+ * @author Guo Chen
+ * @date 2021年12月05日 19:41
+ */
+public abstract class Pay {
+    protected IPayMode payMode;
+    /**
+     *
+     * @author Guo Chen
+     * @date 2021/12/5 20:14
+     * @param payMode 
+     * @return null
+     */
+    public Pay(IPayMode payMode){
+        this.payMode=payMode;
+    }
+    /**
+     *
+     * @author Guo Chen
+     * @date 2021/12/5 20:14
+     * @param uId
+     * @param tradeId
+     * @param amount 
+     * @return java.lang.String
+     */
+    public abstract String transfer(String uId, String tradeId, BigDecimal amount);
+}
+```
 
 （2）微信支付实现类
-![image](https://user-images.githubusercontent.com/66066390/145041946-05a322db-477a-49c2-b385-b3390a195492.png)
 
-（3）付款方式接口
-![image](https://user-images.githubusercontent.com/66066390/145041999-dde5e205-b8b0-45fd-b4c3-edcd27cf49a3.png)
 
-（4）刷脸方式实现类
-![image](https://user-images.githubusercontent.com/66066390/145042036-b24e6463-bc0d-45aa-87b5-df2ed0b94a09.png)
+（3）付款方式接口<br>
+
+
+（4）刷脸方式实现类<br>
+
 
 （5）测试类
-![image](https://user-images.githubusercontent.com/66066390/145042110-12da4ad7-5057-4173-8fa2-971f9a773594.png)
 
-2. 项目结构
+
+2. 项目结构<br>
 ![image](https://user-images.githubusercontent.com/66066390/145042139-712f479a-4b2d-4e4a-8b22-df1ef0ca0a17.png)
 
 
